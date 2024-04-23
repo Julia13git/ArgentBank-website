@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-//simport User from "./pages/SignIn";
 import SignIn from "./pages/SignIn";
+import UserPage from "./pages/UserPage";
 
 function Router() {
   return (
@@ -9,6 +9,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/UserPage" element={<UserPage />} />
       </Routes>
     </>
   );
