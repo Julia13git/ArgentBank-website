@@ -29,7 +29,7 @@ function Header() {
 
       {!isEmpty(user) ? (
         <div className="main-user-header">
-          <Link to="/UserPage">
+          <Link className="main-nav-item" to="/UserPage">
             <i className="fa fa-user-circle"></i>
             {user.userName}
           </Link>

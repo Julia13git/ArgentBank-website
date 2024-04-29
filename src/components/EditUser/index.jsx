@@ -45,16 +45,18 @@ function EditUser() {
         </div>
       ) : (
         <div className="header">
-          <h1>Edit user info</h1>
-          <br />
-          {user.firstName} {user.lastName}
+          <h1>
+            Edit user info
+            <br />
+            {user.firstName} {user.lastName}
+          </h1>
           <div className="form-block">
             <form ref={form}>
-              <div className="input-wrapper">
+              <div className="input-wrapper-inline">
                 <label htmlFor="username">User name: </label>
                 <input type="text" id="username" defaultValue={user.userName} />
               </div>
-              <div className="input-wrapper">
+              <div className="input-wrapper-inline">
                 <label htmlFor="firstname">First name:</label>
                 <input
                   type="firstname"
@@ -63,7 +65,7 @@ function EditUser() {
                   disabled
                 />
               </div>
-              <div className="input-wrapper">
+              <div className="input-wrapper-inline">
                 <label htmlFor="lastname">Last name:</label>
                 <input
                   type="lastname"
