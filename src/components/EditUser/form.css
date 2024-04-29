@@ -1,0 +1,40 @@
+.form-block{
+  display: flex;
+  margin: auto;
+  justify-content: center;  
+}
+
+.button-block{
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+    display: block;
+    width: 40%;
+    padding: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+  }
+
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .input-wrapper label {
+    font-weight: bold;
+    color: white;
+  }
+  
+  .input-wrapper input {
+    padding: 5px;
+    font-size: 1.2rem;
+  }

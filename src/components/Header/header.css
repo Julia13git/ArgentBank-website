@@ -45,3 +45,8 @@ color: #42b983;
     max-width: 100%;
     width: 200px;
 }
+
+.main-user-header {
+    display: flex;
+    gap : 15px;
+}

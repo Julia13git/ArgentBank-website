@@ -4,7 +4,7 @@ import "./footer.css";
 function Footer() {
   return (
     <div className="footer">
-      <p className="footer-text">Copyright 2020 Argent Bank</p>
+      <p className="footer-text">Copyright 2024 Argent Bank</p>
     </div>
   );
 }
