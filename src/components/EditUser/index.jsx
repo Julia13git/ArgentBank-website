@@ -21,12 +21,12 @@ function EditUser() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    const userName = {
+    const userProfileWithToken = {
       userName: form.current[0].value,
       token: token,
     };
 
-    dispatch(updateProfile(userName));
+    dispatch(updateProfile(userProfileWithToken));
     setDisplayEdit(false);
   };
 
