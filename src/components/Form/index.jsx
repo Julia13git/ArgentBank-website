@@ -10,7 +10,7 @@ function Form() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // Donnees du user connecté
-  const user = useSelector((state) => state.userReducer?.user);
+  const user = useSelector((state) => state.userReducer);
 
   const handleForm = (e) => {
     e.preventDefault();

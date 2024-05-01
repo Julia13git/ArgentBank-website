@@ -7,8 +7,7 @@ function EditUser() {
   // Donnees du user connecté
   const form = useRef();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userReducer?.user);
-  const token = useSelector((state) => state.userReducer?.token);
+  const user = useSelector((state) => state.userReducer);
   const [displayEdit, setDisplayEdit] = useState(false);
 
   const handleCancel = (e) => {
@@ -21,12 +20,11 @@ function EditUser() {
 
   const handleSave = (e) => {
     e.preventDefault();
-    const userProfileWithToken = {
+    const userProfile = {
       userName: form.current[0].value,
-      token: token,
     };
 
-    dispatch(updateProfile(userProfileWithToken));
+    dispatch(updateProfile(userProfile));
     setDisplayEdit(false);
   };
 

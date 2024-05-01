@@ -7,7 +7,7 @@ import { isEmpty } from "../Utils";
 
 function Header() {
   // Donnees du user connecté
-  const user = useSelector((state) => state.userReducer?.user);
+  const user = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSignOut = (e) => {

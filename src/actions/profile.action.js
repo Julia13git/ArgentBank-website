@@ -1,8 +1,8 @@
-import axios from "axios"
+import api from "./ApiInterceptor";
 
 export const USERNAME_UPDATED = "USERNAME_UPDATED";
 
-export const updateProfile = (userProfileWithtoken) => {
+export const updateProfile = (userProfile) => {
 
 
     return (dispatch) => {        
@@ -10,17 +10,19 @@ export const updateProfile = (userProfileWithtoken) => {
         //  "userName": <la nouvelle valeur"
         //}        
         //console.log(userProfile);
+        const token = localStorage.getItem("token");
+
         const options = {
-            headers: {'Authorization': 'Bearer' + userProfileWithtoken.token}
+            headers: {'Authorization': 'Bearer' + token}
           };
         const userName = {
-            userName : userProfileWithtoken.userName
+            userName : userProfile.userName
         }
-        return axios.put("http://localhost:3001/api/v1/user/profile",userName,options)
+        return api.put("http://localhost:3001/api/v1/user/profile",userName,options)
         .then((res) => {
             console.log(res);
             if (res.status === 200){ 
-                dispatch({type:USERNAME_UPDATED, payload : userProfileWithtoken.userName})                        
+                dispatch({type:USERNAME_UPDATED, payload : userProfile.userName})                        
             }
         });
     };

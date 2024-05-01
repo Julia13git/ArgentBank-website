@@ -9,7 +9,7 @@ import EditUser from "../../components/EditUser";
 
 function UserPage() {
   // Donnees du user connecté
-  const user = useSelector((state) => state.userReducer?.user);
+  const user = useSelector((state) => state.userReducer);
 
   return (
     <>
