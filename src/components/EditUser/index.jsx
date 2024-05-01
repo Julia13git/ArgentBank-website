@@ -35,7 +35,7 @@ function EditUser() {
           <h1>
             Welcome back
             <br />
-            {user.firstName} {user.lastName}
+            {user.userName}
           </h1>
           <button className="edit-button" onClick={(e) => handlerEdit()}>
             Edit Name
@@ -43,11 +43,7 @@ function EditUser() {
         </div>
       ) : (
         <div className="header">
-          <h1>
-            Edit user info
-            <br />
-            {user.firstName} {user.lastName}
-          </h1>
+          <h1>Edit {user.userName} info</h1>
           <div className="form-block">
             <form ref={form}>
               <div className="input-wrapper-inline">
@@ -73,8 +69,15 @@ function EditUser() {
                 />
               </div>
               <div className="button-block">
-                <button onClick={(e) => handleSave(e)}>Save</button>
-                <button onClick={(e) => handleCancel(e)}>Cancel</button>
+                <button className="save-cancel" onClick={(e) => handleSave(e)}>
+                  Save
+                </button>
+                <button
+                  className="save-cancel"
+                  onClick={(e) => handleCancel(e)}
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           </div>

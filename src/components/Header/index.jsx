@@ -21,7 +21,7 @@ function Header() {
       <Link className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
-          src="./images/argentBankLogo.png"
+          src="./images/argentBankLogo.webp"
           alt="Argent Bank Logo"
         />
         <h1 className="sr-only">Argent Bank</h1>
@@ -50,30 +50,6 @@ function Header() {
           </Link>
         </div>
       )}
-      {/* {user && (
-        <div className="main-user-header">
-          <span>
-            <i className="fa fa-user-circle"></i>
-            {user.firstName}
-          </span>
-          <Link
-            className="main-nav-item"
-            to="#"
-            onClick={(e) => handleSignOut(e)}
-          >
-            <i className="fa fa-sign-out"></i>
-            Sign out
-          </Link>
-        </div>
-      )}
-      {isEmpty(user) && (
-        <div>
-          <Link className="main-nav-item" to="/SignIn">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </Link>
-        </div>
-      )} */}
     </nav>
   );
 }

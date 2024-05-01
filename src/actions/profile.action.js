@@ -9,7 +9,6 @@ export const updateProfile = (userProfile) => {
         // userProfile doit contenir {
         //  "userName": <la nouvelle valeur"
         //}        
-        //console.log(userProfile);
         const token = localStorage.getItem("token");
 
         const options = {

@@ -53,3 +53,7 @@ color: #42b983;
     display: flex;
     gap : 15px;
 }
+
+i :hover{
+    text-decoration: none;
+}
