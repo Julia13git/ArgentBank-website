@@ -1,11 +1,12 @@
-import api from "../interceptor.js";
+import api from "../interceptors/interceptor.js";
 
 export const PROFILE_RETREIVED = "PROFILE_RETREIVED";
 export const LOGOUT_REQUESTED = "LOGOUT_REQUESTED";
 
 export const userLogin = (userData) => {
+    
 
-    return (dispatch) => {        
+    return (dispatch) => {    
         // Verification avec login / password
         return api.post("http://localhost:3001/api/v1/user/login",userData)
         .then((res) => {
@@ -26,8 +27,10 @@ export const userLogin = (userData) => {
                     } else {
                         //console.log("Erreur dans la recuperation des informations de profil")
                     }
-                });                                
+                });
+                                            
             } else {
+                console.log("Connexion impossible");
                 // Connection KO on reste sur la page de login
             }
            

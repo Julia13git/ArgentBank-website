@@ -47,6 +47,7 @@ function Form() {
       <button type="submit" className="sign-in-button">
         Sign In
       </button>
+      {/* <div id="error-message">Connexion impossible</div> */}
     </form>
   );
 }

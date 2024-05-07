@@ -1,4 +1,4 @@
-import api from "../interceptor.js";
+import api from "../interceptors/interceptor.js";
 
 export const USERNAME_UPDATED = "USERNAME_UPDATED";
 
