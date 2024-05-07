@@ -9,7 +9,6 @@ function Router() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/SignOut" element={<Home />} />
         <Route path="/UserPage" element={<UserPage />} />
       </Routes>
     </>
