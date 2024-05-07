@@ -2,12 +2,13 @@ import React from "react";
 import "./header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { userLogout } from "../../actions/login.action";
+import { userLogout } from "../../redux/actions/login.action";
 import { isEmpty } from "../Utils";
 
 function Header() {
   // Donnees du user connecté
   const user = useSelector((state) => state.userReducer);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSignOut = (e) => {
@@ -24,10 +25,10 @@ function Header() {
           src="./images/argentBankLogo.webp"
           alt="Argent Bank Logo"
         />
-        <h1 className="sr-only">Argent Bank</h1>
+        {/* <h1 className="sr-only">Argent Bank</h1> */}
       </Link>
 
-      {!isEmpty(user) ? (
+      {!isEmpty(user) && !isEmpty(localStorage.getItem("token")) ? (
         <div className="main-user-header">
           <Link className="main-nav-item" to="/UserPage">
             <i className="fa fa-user-circle"></i>

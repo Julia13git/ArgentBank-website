@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./form.css";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "../../actions/profile.action";
+import { updateProfile } from "../../redux/actions/profile.action";
 
 function EditUser() {
   // Donnees du user connecté

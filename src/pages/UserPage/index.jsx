@@ -8,6 +8,10 @@ import { useSelector } from "react-redux";
 import EditUser from "../../components/EditUser";
 
 function UserPage() {
+  if (!localStorage.getItem("token")) {
+    window.location.assign("/");
+  }
+
   // Donnees du user connecté
   const user = useSelector((state) => state.userReducer);
 
@@ -16,7 +20,7 @@ function UserPage() {
       <Header />
       <div className="main bg-dark">
         <EditUser />
-        <h2 className="sr-only">Accounts</h2>
+        {/* <h2 className="sr-only">Accounts</h2> */}
         {accounts.map((account, index) => (
           <Account
             title={account.title}

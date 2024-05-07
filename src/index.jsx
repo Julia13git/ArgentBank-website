@@ -10,7 +10,7 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 // Reducer
-import combineReducers from "./reducers";
+import combineReducers from "./redux/reducers";
 
 // Load persisted state from localStorage, if available
 const persistedState = JSON.parse(localStorage.getItem("reduxState")) || {};

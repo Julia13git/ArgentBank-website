@@ -12,7 +12,6 @@ function Home() {
       <Header />
       <Banner />
       <div className="features">
-        <h2 className="sr-only">Features</h2>
         {features.map((feature, index) => (
           <Feature
             image={feature.img}

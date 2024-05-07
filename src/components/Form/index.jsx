@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./form.css";
-import { userLogin } from "../../actions/login.action";
+import { userLogin } from "../../redux/actions/login.action";
 import { useNavigate } from "react-router-dom";
 import { isEmpty } from "../Utils";
 
@@ -25,7 +25,7 @@ function Form() {
   // Quand le user est mis à jour avec le userReducer,
   // React execute la fonction dans useEffect()
   useEffect(() => {
-    if (!isEmpty(user)) {
+    if (!isEmpty(user) && !isEmpty(localStorage.getItem("token"))) {
       navigate("/UserPage");
     }
   }, [user]);
