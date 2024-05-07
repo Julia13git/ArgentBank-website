@@ -323,4 +323,4 @@ definitions:
     properties:
       note:
         type: string
-        description: transaction note
+        description: Edit transaction note
