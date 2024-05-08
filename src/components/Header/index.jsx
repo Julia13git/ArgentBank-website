@@ -1,21 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./header.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout } from "../../redux/actions/login.action";
+import { getProfile } from "../../redux/actions/profile.action";
 import { isEmpty } from "../Utils";
 
 function Header() {
   // Donnees du user connecté
   const user = useSelector((state) => state.userReducer);
-
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleSignOut = (e) => {
     e.preventDefault();
     dispatch(userLogout());
     navigate("/");
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(getProfile());
+    }
+  }, [dispatch, location]);
 
   return (
     <nav className="main-nav">
@@ -25,7 +34,6 @@ function Header() {
           src="./images/argentBankLogo.webp"
           alt="Argent Bank Logo"
         />
-        {/* <h1 className="sr-only">Argent Bank</h1> */}
       </Link>
 
       {!isEmpty(user) && !isEmpty(localStorage.getItem("token")) ? (

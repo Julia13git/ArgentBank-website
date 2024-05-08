@@ -20,7 +20,6 @@ function UserPage() {
       <Header />
       <div className="main bg-dark">
         <EditUser />
-        {/* <h2 className="sr-only">Accounts</h2> */}
         {accounts.map((account, index) => (
           <Account
             title={account.title}

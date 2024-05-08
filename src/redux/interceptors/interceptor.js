@@ -1,21 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create();
 
-// Add a response interceptor
 api.interceptors.response.use(
-response => {
-    console.log("dans interceptor ok");
+  (response) => {
     return response;
-},
-error => {
+  },
+  (error) => {
     if (error.response && error.response.status === 401) {
-        localStorage.clear()
-        window.location.assign('/')        
-        return Promise.reject(error);
+      localStorage.clear();
+      window.location.assign("/");
     }
-}
-)
-;
+    return error;
+  }
+);
 
 export default api;

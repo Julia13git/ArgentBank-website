@@ -9,7 +9,6 @@ function Form() {
   const form = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // Donnees du user connecté
   const user = useSelector((state) => state.userReducer);
 
   const handleForm = (e) => {
@@ -22,10 +21,9 @@ function Form() {
     dispatch(userLogin(userData));
   };
 
-  // Quand le user est mis à jour avec le userReducer,
-  // React execute la fonction dans useEffect()
+  // Redirection quand presence du token
   useEffect(() => {
-    if (!isEmpty(user) && !isEmpty(localStorage.getItem("token"))) {
+    if (!isEmpty(localStorage.getItem("token"))) {
       navigate("/UserPage");
     }
   }, [user]);
@@ -47,7 +45,7 @@ function Form() {
       <button type="submit" className="sign-in-button">
         Sign In
       </button>
-      {/* <div id="error-message">Connexion impossible</div> */}
+      {user?.login_failed && <div id="error-message">Connexion impossible</div>}
     </form>
   );
 }

@@ -1,45 +1,36 @@
 import api from "../interceptors/interceptor.js";
 
-export const PROFILE_RETREIVED = "PROFILE_RETREIVED";
 export const LOGOUT_REQUESTED = "LOGOUT_REQUESTED";
+export const TOKEN_RETREIVED = "TOKEN_RETREIVED";
+export const LOGIN_FAILED = "LOGIN_FAILED";
 
 export const userLogin = (userData) => {
-    
-
-    return (dispatch) => {    
-        // Verification avec login / password
-        return api.post("http://localhost:3001/api/v1/user/login",userData)
-        .then((res) => {
-              if (res.status === 200){
-                // Connection OK on va recuperer les information de profil pour les passer au userReducer
-                let token = res.data.body.token;
-                localStorage.setItem("token", token);
-                const options = {
-                    headers: {'Authorization': 'Bearer' + token}
-                  };
-                
-                // Recuperation des données du user avec le token (api securisée)
-                api.post("http://localhost:3001/api/v1/user/profile",null,options)
-                .then((profileInfo) => {
-                    if (profileInfo.status === 200){
-                        dispatch({type:PROFILE_RETREIVED, payload : profileInfo.data.body})                        
-                        
-                    } else {
-                        //console.log("Erreur dans la recuperation des informations de profil")
-                    }
-                });
-                                            
-            } else {
-                console.log("Connexion impossible");
-                // Connection KO on reste sur la page de login
-            }
-           
-        });
-    };
+  return (dispatch) => {
+    // Verification avec login / password
+    return api
+      .post("http://localhost:3001/api/v1/user/login", userData)
+      .then((res) => {
+        if (res.status === 200) {
+          // Connection OK on stocke le token
+          let token = res.data.body.token;
+          localStorage.setItem("token", token);
+          dispatch({
+            type: TOKEN_RETREIVED,
+            payload: { token_retreived: true },
+          });
+        } else {
+          console.log("Connexion impossible");
+          dispatch({
+            type: LOGIN_FAILED,
+            payload: { login_failed: true },
+          });
+        }
+      });
+  };
 };
 
-export const userLogout =  () => {
-    return(dispatch) => {
-        dispatch({type:LOGOUT_REQUESTED})                        
-    }
-}
+export const userLogout = () => {
+  return (dispatch) => {
+    dispatch({ type: LOGOUT_REQUESTED });
+  };
+};
