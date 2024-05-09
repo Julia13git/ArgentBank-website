@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import { accounts } from "../../helpers/accounts";
+import EditUser from "../../components/EditUser";
 import Account from "../../components/Account";
+import { accounts } from "../../helpers/accounts";
 import "./userpage.css";
 import { useSelector } from "react-redux";
-import EditUser from "../../components/EditUser";
 
 function UserPage() {
-  if (!localStorage.getItem("token")) {
-    window.location.assign("/");
-  }
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      window.location.assign("/");
+    }
+  }, [location]);
 
   // Donnees du user connecté
   const user = useSelector((state) => state.userReducer);
