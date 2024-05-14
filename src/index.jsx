@@ -10,7 +10,6 @@ import store from "./redux/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // Desactiver car charge 2 fois les composants
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>

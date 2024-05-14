@@ -126,7 +126,47 @@ paths:
           schema:
             $ref: "#/definitions/Accounts"
         "400":
-          description: Invalid Fields
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+  /accounts/{id}:
+    get:
+      tags:
+        - User Transactions
+      summary: User Account
+      description: API for getting a user account
+      parameters:
+        - in: header
+          name: Authorization
+          description: "Attach Bearer JWT token"
+          required: true
+          type: string
+        - in: path
+          name: id
+          description: User's ID
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Account retrieved successully
+          schema:
+            $ref: "#/definitions/Account"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
   /accounts/{accountId}/transactions:
@@ -154,15 +194,21 @@ paths:
           schema:
             $ref: "#/definitions/AccountTransactions"
         "400":
-          description: Invalid Fields
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
-  /transactions/{transactionId}/category:
+  /transactions/{transactionId}:
     put:
       tags:
         - User Transactions
-      summary: User Transaction Category
-      description: API for updating transactions' categories
+      summary: User Transaction Data
+      description: API for updating transactions' datas
       parameters:
         - in: header
           name: Authorization
@@ -176,51 +222,23 @@ paths:
           required: true
         - in: body
           name: body
-          description: Category Payload
+          description: Data Payload
           required: true
           schema:
-            $ref: "#/definitions/Category"
+            $ref: "#/definitions/ModifiedTransactionsDatas"
       responses:
         "200":
-          description: Transaction's category updated successully
+          description: Transaction's datas updated successully
           schema:
-            $ref: "#/definitions/Category"
+            $ref: "#/definitions/ModifiedTransactionsDatas"
         "400":
-          description: Invalid Fields
-        "500":
-          description: Internal Server Error
-  /transactions/{transactionId}/note:
-    put:
-      tags:
-        - User Transactions
-      summary: User Transaction Note
-      description: API for updating transactions' notes
-      produces:
-        - application/json
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          type: string
-          required: true
-        - in: path
-          name: transactionId
-          description: Transaction's ID
-          required: true
-          type: string
-        - in: body
-          name: body
-          required: true
-          description: Note Payload
-          schema:
-            $ref: "#/definitions/Note"
-      responses:
-        "200":
-          description: Transaction updated successully
-          schema:
-            $ref: "#/definitions/Note"
-        "400":
-          description: Invalid Fields
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
 securityDefinitions:
@@ -291,6 +309,19 @@ definitions:
           type: number
         description:
           type: string
+  Account:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        amount:
+          type: number
+        description:
+          type: string
   AccountTransactions:
     type: array
     items:
@@ -312,15 +343,14 @@ definitions:
           type: string
         note:
           type: string
-  Category:
-    type: object
-    properties:
-      category:
-        type: string
-        description: Edit transaction category
-  Note:
-    type: object
-    properties:
-      note:
-        type: string
-        description: Edit transaction note
+  ModifiedTransactionsDatas:
+    type: array
+    items:
+      type: object
+      properties:
+        category:
+          type: string
+          description: Edit transaction category
+        note:
+          type: string
+          description: transaction note
