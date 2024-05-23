@@ -524,7 +524,7 @@ definitions:
     properties:
       categoryId:
         type: integer
-        description: Unique identifier for the category.
+        description: category Id
       categoryLabel:
         type: string
-        description: Human-readable label for the category.
+        description: category
