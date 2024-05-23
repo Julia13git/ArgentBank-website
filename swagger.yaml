@@ -103,10 +103,12 @@ paths:
           description: Internal Server Error
   /users/{id}/accounts:
     get:
+      security:
+        - Bearer: []
       tags:
         - User Transactions
-      summary: User Accounts
-      description: API for getting all accounts
+      summary: Get all User Accounts
+      description: API for getting all user accounts
       parameters:
         - in: header
           name: Authorization
@@ -137,9 +139,11 @@ paths:
           description: Internal Server Error
   /accounts/{id}:
     get:
+      security:
+        - Bearer: []
       tags:
         - User Transactions
-      summary: User Account
+      summary: Get User Account
       description: API for getting a user account
       parameters:
         - in: header
@@ -171,10 +175,12 @@ paths:
           description: Internal Server Error
   /accounts/{accountId}/transactions:
     get:
+      security:
+        - Bearer: []
       tags:
         - User Transactions
-      summary: User Account Transactions
-      description: API for getting the user's account transactions
+      summary: Get user's account transactions for the current month
+      description: API for getting the user's account transactions for the current month
       parameters:
         - in: header
           name: Authorization
@@ -190,7 +196,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: User's account transactions retrieved successully
+          description: User's account transactions retrieved successfully
           schema:
             $ref: "#/definitions/AccountTransactions"
         "400":
@@ -204,11 +210,76 @@ paths:
         "500":
           description: Internal Server Error
   /transactions/{transactionId}:
-    put:
+    get:
+      security:
+        - Bearer: []
       tags:
         - User Transactions
-      summary: User Transaction Data
-      description: API for updating transactions' datas
+      summary: Get Transaction by Id
+      description: API for getting the transaction by Id
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+        - in: path
+          name: transactionId
+          description: Transaction Id
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: User's transaction retrieved successfully
+          schema:
+            $ref: "#/definitions/Transaction"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+  /transactions/categories:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Get the list of the user categories
+      description: Getting the list of the user categories.
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: List of categories retrieved successfully.
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Category"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+  /transactions/{transactionId}/category:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Update user transaction category
+      description: API for updating a transaction category
       parameters:
         - in: header
           name: Authorization
@@ -222,15 +293,117 @@ paths:
           required: true
         - in: body
           name: body
-          description: Data Payload
+          description: Category Payload
           required: true
           schema:
-            $ref: "#/definitions/ModifiedTransactionsDatas"
+            $ref: "#/definitions/TransactionCategory"
       responses:
         "200":
-          description: Transaction's datas updated successully
+          description: Transaction category updated successfully
           schema:
-            $ref: "#/definitions/ModifiedTransactionsDatas"
+            $ref: "#/definitions/TransactionCategory"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Delete user transaction category
+      description: API for deleting a transaction category
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+        - in: path
+          name: transactionId
+          description: Account Transaction ID
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Transaction category deleted successfully
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+  /transactions/{transactionId}/note:
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Update user transaction note
+      description: API for updating a transaction note
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+        - in: path
+          name: transactionId
+          description: Account Transaction ID
+          type: string
+          required: true
+        - in: body
+          name: body
+          description: Note Payload
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionNote"
+      responses:
+        "200":
+          description: Transaction note updated successfully
+          schema:
+            $ref: "#/definitions/TransactionNote"
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not found
+        "500":
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Delete user transaction note
+      description: API for deleting a transaction note
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+        - in: path
+          name: transactionId
+          description: Account Transaction ID
+          type: string
+          required: true
+      responses:
+        "200":
+          description: Transaction note deleted successfully
         "400":
           description: Bad Request
         "401":
@@ -299,58 +472,59 @@ definitions:
   Accounts:
     type: array
     items:
-      type: object
-      properties:
-        id:
-          type: integer
-        title:
-          type: string
-        amount:
-          type: number
-        description:
-          type: string
+      $ref: "#/definitions/Account"
   Account:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: integer
-        title:
-          type: string
-        amount:
-          type: number
-        description:
-          type: string
+    type: object
+    properties:
+      id:
+        type: integer
+      title:
+        type: string
+      amount:
+        type: number
+      description:
+        type: string
   AccountTransactions:
     type: array
     items:
-      type: object
-      properties:
-        id:
-          type: integer
-        date:
-          type: string
-        description:
-          type: string
-        amount:
-          type: number
-        balance:
-          type: string
-        transaction_type:
-          type: string
-        category:
-          type: string
-        note:
-          type: string
-  ModifiedTransactionsDatas:
-    type: array
-    items:
-      type: object
-      properties:
-        category:
-          type: string
-          description: Edit transaction category
-        note:
-          type: string
-          description: transaction note
+      $ref: "#/definitions/Transaction"
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: number
+      balance:
+        type: string
+      transaction_type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
+  TransactionCategory:
+    type: object
+    properties:
+      category:
+        type: string
+        description: transaction category
+  TransactionNote:
+    type: object
+    properties:
+      note:
+        type: string
+        description: transaction note
+  Category:
+    type: object
+    properties:
+      categoryId:
+        type: integer
+        description: Unique identifier for the category.
+      categoryLabel:
+        type: string
+        description: Human-readable label for the category.
