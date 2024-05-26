@@ -312,37 +312,6 @@ paths:
           description: Not found
         "500":
           description: Internal Server Error
-    delete:
-      security:
-        - Bearer: []
-      tags:
-        - User Transactions
-      summary: Delete user transaction category
-      description: API for deleting a transaction category
-      parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          type: string
-          required: true
-        - in: path
-          name: transactionId
-          description: Account Transaction ID
-          type: string
-          required: true
-      responses:
-        "200":
-          description: Transaction category deleted successfully
-        "400":
-          description: Bad Request
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "404":
-          description: Not found
-        "500":
-          description: Internal Server Error
   /transactions/{transactionId}/note:
     put:
       security:
